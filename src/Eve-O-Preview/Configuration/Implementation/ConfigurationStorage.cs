@@ -27,7 +27,14 @@ namespace EveOPreview.Configuration.Implementation
 
 			string rawData = File.ReadAllText(filename);
 
-			JsonConvert.PopulateObject(rawData, this._thumbnailConfiguration);
+			JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
+			{
+				ObjectCreationHandling = ObjectCreationHandling.Replace
+			};
+
+			// StageHotkeyArraysToAvoidDuplicates(rawData);
+
+			JsonConvert.PopulateObject(rawData, this._thumbnailConfiguration, jsonSerializerSettings);
 
 			// Validate data after loading it
 			this._thumbnailConfiguration.ApplyRestrictions();

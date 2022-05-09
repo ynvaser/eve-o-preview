@@ -165,6 +165,57 @@ The following hotkey is described as `modifier+key` where `modifier` can be **Co
 
 <div style="page-break-after: always;"></div>
 
+### Cycle Clients with Hotkey Setup
+
+In a similar pattern to the per client Hotkey Setup, It is possible to set a key combinations to cycle through select Eve Windows. EVE-O Preview doesn't provide any GUI to set the these hotkeys. It should be done via editing the configuration file directly. Don't forget to make a backup copy of the file before editing it.
+
+If you have not run EVE-O Preview before, or since this feature was added then it is recommended to quickly open and close EVE-O Preview once to trigger the config to update with some sample values. 
+
+**Note**: Don't forget to make a backup copy of the file before editing it.
+
+Open the file using any text editor. find the entries **CycleGroup1ForwardHotkeys** and **CycleGroup1BackwardHotkeys**. Most probably it will look like
+
+    "CycleGroup1ForwardHotkeys": [
+      "F14",
+      "Control+F14"
+    ],
+    "CycleGroup1BackwardHotkeys": [
+      "F13",
+      "Control+F13"
+    ]
+
+**Note**: It is highly recommended to leave the Hotkey values as default and bind them with a gaming device if you can support it.
+
+Next find the entry **CycleGroup1ForwardHotkeys**. Most probably it will look like
+
+    "CycleGroup1ClientsOrder": {
+      "EVE - Example DPS Toon 1": "1",
+      "EVE - Example DPS Toon 2": "2",
+      "EVE - Example DPS Toon 3": "3"
+    }
+
+You should modify this entry with a list of each of your alts replacing "Example DPS Toon 1", etc with the name of your character. The numbers on the right are used to force the order in which they cycle.
+If a character appears in the list but is not currently logged in, then it will simply be skipped.
+If a character does not appear in the list, then they will never become active when cycling clients.
+
+By now you may have noticed that there are two groups. The above configuration can be followed for a second group by using the values **CycleGroup2ForwardHotkeys**, **CycleGroup2BackwardHotkeys**, and **CycleGroup2ForwardHotkeys**
+This may provide useful if you want to have one HotKey to cycle through a group of DPS characters, while another HotKey cycles through support roles such as gate scouts, or a group of logi.
+
+Alternatively you may not want to use any of these HotKeys. Please note that deleting the values in their entirety will simply result in them being automatically re-generated.
+Should you wish to remove these HotKeys completely, Simply set the values to empty, such as the example below:
+      "CycleGroup1ForwardHotkeys": [],
+	  "CycleGroup1BackwardHotkeys": [],
+	  "CycleGroup1ClientsOrder": {},
+	  "CycleGroup2ForwardHotkeys": [],
+	  "CycleGroup2BackwardHotkeys": [],
+	  "CycleGroup2ClientsOrder": {}
+
+**Hints** 
+* Minimise the use of modifiers or standard keys to minimise issues with the client playing up. In the default example unusual Function keys (e.g. F14) are used which are then bound to a game pad or gaming mouse.
+* The Eve client can be somewhat less than stable, often getting confused as client focus switches. It is near certain that you will experience issues such as keys sticking or even in some cases D-Scan running each time the client swaps. So far I have found no perfect solution and opt for the most stable solution instead, of sticking to the F14+ keys.
+* For the best experience try to use the Control modifier. In the default example F14 is used to cycle to the next client, but if pressed mid locking a target (Control + Clicking) then the client will not cycle. By registering Control+F4 as an additional hotkey, the client will cycle.
+* For a list of supported keys, see: https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys
+
 ### Compatibility Mode
 
 This setting allows to enable an alternate thumbnail render. This render doesn't use advanced DWM API to create live previews. Instead it is a screenshot-based render with the following pros and cons:

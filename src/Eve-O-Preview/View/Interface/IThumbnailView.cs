@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using EveOPreview.Services;
 
 namespace EveOPreview.View
 {
@@ -20,7 +21,8 @@ namespace EveOPreview.View
 		void SetOpacity(double opacity);
 		void SetFrames(bool enable);
 		void SetTopMost(bool enableTopmost);
-		void SetHighlight(bool enabled, Color color, int width);
+		void SetHighlight();
+		void SetHighlight(bool enabled, int width);
 
 		void ZoomIn(ViewZoomAnchor anchor, int zoomFactor);
 		void ZoomOut();
@@ -37,5 +39,9 @@ namespace EveOPreview.View
 
 		Action<IntPtr> ThumbnailActivated { get; set; }
 		Action<IntPtr, bool> ThumbnailDeactivated { get; set; }
+
+		IWindowManager WindowManager { get; }
+		void SetDefaultBorderColor();
+		void ClearBorder();
 	}
 }

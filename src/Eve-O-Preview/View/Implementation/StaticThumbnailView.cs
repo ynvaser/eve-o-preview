@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using EveOPreview.Configuration;
 using EveOPreview.Services;
 
 namespace EveOPreview.View
@@ -9,10 +10,11 @@ namespace EveOPreview.View
 	{
 		#region Private fields
 		private readonly PictureBox _thumbnail;
+		private IThumbnailConfiguration _config;
 		#endregion
 
-		public StaticThumbnailView(IWindowManager windowManager)
-			: base(windowManager)
+		public StaticThumbnailView(IWindowManager windowManager, IThumbnailConfiguration config, IThumbnailManager thumbnailManager)
+			: base(windowManager, config, thumbnailManager)
 		{
 			this._thumbnail = new StaticThumbnailImage
 			{
@@ -22,6 +24,7 @@ namespace EveOPreview.View
 				Size = new Size(this.ClientSize.Width, this.ClientSize.Height)
 			};
 			this.Controls.Add(this._thumbnail);
+			this._config = config;
 		}
 
 		protected override void RefreshThumbnail(bool forceRefresh)

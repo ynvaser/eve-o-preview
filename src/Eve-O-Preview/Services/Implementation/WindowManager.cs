@@ -5,7 +5,7 @@ using EveOPreview.Services.Interop;
 
 namespace EveOPreview.Services.Implementation
 {
-	sealed class WindowManager : IWindowManager
+	public class WindowManager : IWindowManager
 	{
 		#region Private constants
 		private const int WINDOW_SIZE_THRESHOLD = 300;
@@ -30,6 +30,7 @@ namespace EveOPreview.Services.Implementation
 		public void ActivateWindow(IntPtr handle)
 		{
 			User32NativeMethods.SetForegroundWindow(handle);
+			User32NativeMethods.SetFocus(handle);
 
 			int style = User32NativeMethods.GetWindowLong(handle, InteropConstants.GWL_STYLE);
 

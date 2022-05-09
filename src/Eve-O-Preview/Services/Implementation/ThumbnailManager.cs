@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Threading;
 using EveOPreview.Configuration;
 using EveOPreview.Mediator.Messages;
+using EveOPreview.UI.Hotkeys;
 using EveOPreview.View;
 using MediatR;
 
@@ -42,6 +46,8 @@ namespace EveOPreview.Services
 
 		private int _refreshCycleCount;
 		private int _hideThumbnailsDelay;
+
+		private List<HotkeyHandler> _cycleClientHotkeyHandlers = new List<HotkeyHandler>();
 		#endregion
 
 		public ThumbnailManager(IMediator mediator, IThumbnailConfiguration configuration, IProcessMonitor processMonitor, IWindowManager windowManager, IThumbnailViewFactory factory)
@@ -69,6 +75,109 @@ namespace EveOPreview.Services
 			this._thumbnailUpdateTimer.Interval = new TimeSpan(0, 0, 0, 0, configuration.ThumbnailRefreshPeriod);
 
 			this._hideThumbnailsDelay = this._configuration.HideThumbnailsDelay;
+
+			RegisterCycleClientHotkey(this._configuration.CycleGroup1ForwardHotkeys?.Select(x => this._configuration.StringToKey(x)), true, this._configuration.CycleGroup1ClientsOrder);
+			RegisterCycleClientHotkey(this._configuration.CycleGroup1BackwardHotkeys?.Select(x => this._configuration.StringToKey(x)), false, this._configuration.CycleGroup1ClientsOrder);
+
+			RegisterCycleClientHotkey(this._configuration.CycleGroup2ForwardHotkeys?.Select(x => this._configuration.StringToKey(x)), true, this._configuration.CycleGroup2ClientsOrder);
+			RegisterCycleClientHotkey(this._configuration.CycleGroup2BackwardHotkeys?.Select(x => this._configuration.StringToKey(x)), false, this._configuration.CycleGroup2ClientsOrder);
+		}
+
+		public IThumbnailView GetClientByTitle(string title)
+		{
+			return _thumbnailViews.FirstOrDefault(x => x.Value.Title == title).Value;
+		}
+
+		public IThumbnailView GetClientByPointer(IntPtr ptr)
+		{
+			return _thumbnailViews.FirstOrDefault(x => x.Key == ptr).Value;
+		}
+
+		public IThumbnailView GetActiveClient()
+		{
+			return GetClientByPointer(this._activeClient.Handle);
+		}
+
+		public void SetActive(KeyValuePair<IntPtr, IThumbnailView> newClient)
+		{
+			this.GetActiveClient()?.ClearBorder();
+
+			this._windowManager.ActivateWindow(newClient.Key);
+			this.SwitchActiveClient(newClient.Key, newClient.Value.Title);
+
+			newClient.Value.SetHighlight();
+			newClient.Value.Refresh(true);
+		}
+
+		public void CycleNextClient(bool isForwards, Dictionary<string, string> cycleOrder)
+		{
+			IOrderedEnumerable<KeyValuePair<string, string>> clientOrder;
+			if (isForwards)
+			{
+				clientOrder = cycleOrder.OrderBy(x => x.Value);
+			}
+			else
+			{
+				clientOrder = cycleOrder.OrderByDescending(x => x.Value);
+			}
+
+			bool setNextClient = false;
+			IThumbnailView lastClient = null;
+
+			foreach (var t in clientOrder)
+			{
+				if (t.Key == _activeClient.Title)
+				{
+					setNextClient = true;
+					lastClient = _thumbnailViews.FirstOrDefault(x => x.Value.Title == t.Key).Value;
+					continue;
+				}
+
+				if (!setNextClient)
+				{
+					continue;
+				}
+
+				if (_thumbnailViews.Any(x => x.Value.Title == t.Key))
+				{
+					var ptr = _thumbnailViews.First(x => x.Value.Title == t.Key);
+					SetActive(ptr);
+					return;
+				}
+			}
+
+			// we didn't get a next one. just get the first one from the start.
+			foreach (var t in clientOrder)
+			{
+				if (_thumbnailViews.Any(x => x.Value.Title == t.Key))
+				{
+					var ptr = _thumbnailViews.First(x => x.Value.Title == t.Key);
+					SetActive(ptr);
+					_activeClient = (ptr.Key, t.Key);
+					return;
+				}
+			}
+		}
+
+		public void RegisterCycleClientHotkey(IEnumerable<Keys> keys, bool isForwards, Dictionary<string, string> cycleOrder)
+		{
+			foreach (var hotkey in keys)
+			{
+				if (hotkey == Keys.None)
+				{
+					return;
+				}
+
+				var newHandler = new HotkeyHandler(default(IntPtr), hotkey);
+				newHandler.Pressed += (object s, HandledEventArgs e) =>
+				{
+					this.CycleNextClient(isForwards, cycleOrder);
+					e.Handled = true;
+				};
+
+				newHandler.Register();
+				this._cycleClientHotkeyHandlers.Add(newHandler);
+			}
 		}
 
 		public void Start()
@@ -306,8 +415,9 @@ namespace EveOPreview.Services
 
 				view.IsOverlayEnabled = this._configuration.ShowThumbnailOverlays;
 
-				view.SetHighlight(this._configuration.EnableActiveClientHighlight && (view.Id == this._activeClient.Handle),
-										this._configuration.ActiveClientHighlightColor, this._configuration.ActiveClientHighlightThickness);
+				view.SetHighlight(
+					this._configuration.EnableActiveClientHighlight && (view.Id == this._activeClient.Handle), 
+					this._configuration.ActiveClientHighlightThickness);
 
 				if (!view.IsActive)
 				{
