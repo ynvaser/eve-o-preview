@@ -194,7 +194,7 @@ Next find the entry **CycleGroup1ForwardHotkeys**. Most probably it will look li
       "EVE - Example DPS Toon 3": "3"
     }
 
-You should modify this entry with a list of each of your alts replacing "Example DPS Toon 1", etc with the name of your character. The numbers on the right are used to force the order in which they cycle.
+You should modify this entry with a list of each of your clients replacing "Example DPS Toon 1", etc with the name of your character. The numbers on the right are used to force the order in which they cycle.
 If a character appears in the list but is not currently logged in, then it will simply be skipped.
 If a character does not appear in the list, then they will never become active when cycling clients.
 
@@ -216,6 +216,25 @@ Should you wish to remove these HotKeys completely, Simply set the values to emp
 * The Eve client can be somewhat less than stable, often getting confused as client focus switches. It is near certain that you will experience issues such as keys sticking or even in some cases D-Scan running each time the client swaps. So far I have found no perfect solution and opt for the most stable solution instead, of sticking to the F14+ keys.
 * For the best experience try to use the Control modifier. In the default example F14 is used to cycle to the next client, but if pressed mid locking a target (Control + Clicking) then the client will not cycle. By registering Control+F4 as an additional hotkey, the client will cycle.
 * For a list of supported keys, see: https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.keys
+
+### Per Client Border Color
+Have you ever wanted your main client to show up in a different color so that it more easily catches your eye? Or maybe your Logi to stand out?
+
+EVE-O Preview doesn't provide any GUI to set the these per client overrides as yet. Though, It can be done via editing the configuration file directly. 
+**Note** Don't forget to make a backup copy of the file before editing it.
+
+Open the file using any text editor. find the entry **PerClientActiveClientHighlightColor**. Most probably it will look like
+
+    "PerClientActiveClientHighlightColor": {
+      "EVE - Example Toon 1": "Red",
+      "EVE - Example Toon 2": "Green"
+    }
+
+You should modify this entry with a list of each of your clients replacing "Example Toon 1", etc with the name of your character. The names on the right represent which highligh color to use for that clients border.
+
+If a client does not appear in this list, then it will use the global highlight color by default.
+
+**Hint** For a list of supported colors see: https://docs.microsoft.com/en-us/dotnet/api/system.drawing.color#properties
 
 ### Compatibility Mode
 
