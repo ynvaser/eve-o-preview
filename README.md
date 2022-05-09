@@ -203,6 +203,7 @@ This may provide useful if you want to have one HotKey to cycle through a group 
 
 Alternatively you may not want to use any of these HotKeys. Please note that deleting the values in their entirety will simply result in them being automatically re-generated.
 Should you wish to remove these HotKeys completely, Simply set the values to empty, such as the example below:
+
       "CycleGroup1ForwardHotkeys": [],
 	  "CycleGroup1BackwardHotkeys": [],
 	  "CycleGroup1ClientsOrder": {},
