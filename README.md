@@ -1,5 +1,3 @@
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
-
 ## Overview
 
 The purpose of this application is to provide a simple way to keep an eye on several simultaneously running EVE Online clients and to easily switch between them. While running it shows a set of live thumbnails for each of the active EVE Online clients. These thumbnails allow fast switch to the corresponding EVE Online client either using mouse or configurable hotkeys.
@@ -13,17 +11,11 @@ The program does NOT (and will NOT ever) do the following things:
 * broadcast any keyboard or mouse events
 * anyhow interact with EVE Online except of bringing its main window to foreground or resizing/minimizing it
 
-<div style="text-align: center;">
-
-![EVE Partner](https://github.com/Phrynohyas/eve-o-preview/blob/develop/assets/PartnerBadge.png?raw=true)
-
-</div>
-
 <div style="page-break-after: always;"></div>
 
 **Under any conditions you should NOT use EVE-O Preview for any actions that break EULA or ToS of EVE Online.**
 
-If you have find out that some of the features or their combination of EVE-O Preview might cause actions that can be considered as breaking EULA or ToS of EVE Online you should consider them as a bug and immediately notify the Developer ( Phrynohyas Tig-Rah ) via in-game mail.
+If you have find out that some of the features or their combination of EVE-O Preview might cause actions that can be considered as breaking EULA or ToS of EVE Online you should consider them as a bug and immediately notify the Developer ( Aura Asuna ) via in-game mail.
 
 <div style="page-break-after: always;"></div>
 
@@ -36,7 +28,7 @@ If you have find out that some of the features or their combination of EVE-O Pre
 
 Video Guides:
 
-* [Eve online , How To : Eve-O Preview (multiboxing; legal)](https://youtu.be/2r0NMKbogXU)
+* [Eve online , How To : EVE-O Preview (multiboxing; legal)](https://youtu.be/2r0NMKbogXU)
 
 
 ## System Requirements
@@ -187,7 +179,7 @@ This setting allows to enable an alternate thumbnail render. This render doesn't
 
 ### Maintained by
 
-* Phrynohyas Tig-Rah
+* Aura Asuna
 
 
 ### Created by
@@ -197,6 +189,8 @@ This setting allows to enable an alternate thumbnail render. This render doesn't
 
 
 ### Previous maintainers
+
+* Phrynohyas Tig-Rah
  
 * Makari Aeron
 
@@ -223,8 +217,3 @@ https://bitbucket.org/ulph/eve-o-preview-git
 
 EVE Online, the EVE logo, EVE and all associated logos and designs are the intellectual property of CCP hf. All artwork, screenshots, characters, vehicles, storylines, world facts or other recognizable features of the intellectual property relating to these trademarks are likewise the intellectual property of CCP hf. EVE Online and the EVE logo are the registered trademarks of CCP hf. All rights are reserved worldwide. All other trademarks are the property of their respective owners. CCP hf. has granted permission to pyfa to use EVE Online and all associated logos and designs for promotional and information purposes on its website but does not endorse, and is not in any way affiliated with, pyfa. CCP is in no way responsible for the content on or functioning of this program, nor can it be liable for any damage arising from the use of this program. 
 
-## Additional information for users from Russia and Belarus
-
-* Russia has [illegally annexed Crimea in 2014](https://en.wikipedia.org/wiki/Annexation_of_Crimea_by_the_Russian_Federation) and [brought the war in Donbas](https://en.wikipedia.org/wiki/War_in_Donbas) followed by [full-scale invasion of Ukraine in 2022](https://en.wikipedia.org/wiki/2022_Russian_invasion_of_Ukraine).
-* Russia has brought sorrow and devastations to millions of Ukrainians, killed hundreds of innocent people, damaged thousands of buildings, and forced several million people to flee.
-* [Putin khuylo!](https://en.wikipedia.org/wiki/Putin_khuylo!)
