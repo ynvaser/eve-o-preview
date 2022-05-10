@@ -78,6 +78,8 @@ namespace EveOPreview.Configuration.Implementation
 			this.EnableActiveClientHighlight = false;
 			this.ActiveClientHighlightColor = Color.GreenYellow;
 			this.ActiveClientHighlightThickness = 3;
+
+			this.LoginThumbnailLocation = new Point(5, 5);
 		}
 
 		[JsonProperty("CycleGroup1ForwardHotkeys")]
@@ -165,6 +167,9 @@ namespace EveOPreview.Configuration.Implementation
 
 		public int ActiveClientHighlightThickness { get; set; }
 
+		[JsonProperty("LoginThumbnailLocation")]
+		public Point LoginThumbnailLocation { get; set; }
+
 		[JsonProperty]
 		private Dictionary<string, Dictionary<string, Point>> PerClientLayout { get; set; }
 		[JsonProperty]
@@ -177,14 +182,6 @@ namespace EveOPreview.Configuration.Implementation
 		private Dictionary<string, bool> DisableThumbnail { get; set; }
 		[JsonProperty]
 		private List<string> PriorityClients { get; set; }
-
-		public Point GetDefaultThumbnailLocation()
-		{
-			// Returns default thumbnail location
-			// This location can be used for f.e. EVE clients sitting on the login screen
-			// Can be made configurable later (that's why it was moved out here)
-			return new Point(5, 5);
-		}
 
 		public Point GetThumbnailLocation(string currentClient, string activeClient, Point defaultLocation)
 		{

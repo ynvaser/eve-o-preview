@@ -217,7 +217,7 @@ namespace EveOPreview.Services
 
 				view.ThumbnailLocation = this.IsManageableThumbnail(view)
 											? this._configuration.GetThumbnailLocation(view.Title, this._activeClient.Title, view.ThumbnailLocation)
-											: this._configuration.GetDefaultThumbnailLocation();
+											: this._configuration.LoginThumbnailLocation;
 
 				this._thumbnailViews.Add(view.Id, view);
 
