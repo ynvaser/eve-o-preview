@@ -34,7 +34,7 @@ namespace EveOPreview.View
 		private bool _isCustomMouseModeActive;
 
 		private double _opacity;
-
+		 
 		private DateTime _suppressResizeEventsTimestamp;
 		private Size _baseZoomSize;
 		private Point _baseZoomLocation;

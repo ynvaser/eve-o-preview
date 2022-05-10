@@ -15,22 +15,24 @@ namespace EveOPreview.Configuration.Implementation
 
 		public ThumbnailConfiguration()
 		{
+			this.ConfigVersion = 1;
+
 			this.CycleGroup1ForwardHotkeys = new List<string> { "F14", "Control+F14" };
 			this.CycleGroup1BackwardHotkeys = new List<string> { "F13", "Control+F13" };
-			this.CycleGroup1ClientsOrder = new Dictionary<string, string>
+			this.CycleGroup1ClientsOrder = new Dictionary<string, int>
 			{
-				{ "EVE - Example DPS Toon 1", "1" },
-				{ "EVE - Example DPS Toon 2", "2" },
-				{ "EVE - Example DPS Toon 3", "3" }
+				{ "EVE - Example DPS Toon 1", 1 },
+				{ "EVE - Example DPS Toon 2", 2 },
+				{ "EVE - Example DPS Toon 3", 3 }
 			};
 
 			this.CycleGroup2ForwardHotkeys = new List<string> { "F16", "Control+F16" };
 			this.CycleGroup2BackwardHotkeys = new List<string> { "F15", "Control+F15" };
-			this.CycleGroup2ClientsOrder = new Dictionary<string, string>
+			this.CycleGroup2ClientsOrder = new Dictionary<string, int>
 			{
-				{ "EVE - Example Logi Toon 1", "1" },
-				{ "EVE - Example Scout Toon 2", "2" },
-				{ "EVE - Example Tackle Toon 3", "3" }
+				{ "EVE - Example Logi Toon 1", 1 },
+				{ "EVE - Example Scout Toon 2", 2 },
+				{ "EVE - Example Tackle Toon 3", 3 }
 			};
 
 			this.PerClientActiveClientHighlightColor = new Dictionary<string, Color>
@@ -82,6 +84,10 @@ namespace EveOPreview.Configuration.Implementation
 			this.LoginThumbnailLocation = new Point(5, 5);
 		}
 
+
+		[JsonProperty("ConfigVersion")]
+		public int ConfigVersion { get; set; }
+
 		[JsonProperty("CycleGroup1ForwardHotkeys")]
 		public List<string> CycleGroup1ForwardHotkeys { get; set; }
 
@@ -89,7 +95,7 @@ namespace EveOPreview.Configuration.Implementation
 		public List<string> CycleGroup1BackwardHotkeys { get; set; }
 
 		[JsonProperty("CycleGroup1ClientsOrder")]
-		public Dictionary<string, string> CycleGroup1ClientsOrder { get; set; }
+		public Dictionary<string, int> CycleGroup1ClientsOrder { get; set; }
 
 		[JsonProperty("CycleGroup2ForwardHotkeys")]
 		public List<string> CycleGroup2ForwardHotkeys { get; set; }
@@ -98,7 +104,7 @@ namespace EveOPreview.Configuration.Implementation
 		public List<string> CycleGroup2BackwardHotkeys { get; set; }
 
 		[JsonProperty("CycleGroup2ClientsOrder")]
-		public Dictionary<string, string> CycleGroup2ClientsOrder { get; set; }
+		public Dictionary<string, int> CycleGroup2ClientsOrder { get; set; }
 
 		[JsonProperty("PerClientActiveClientHighlightColor")]
 		public Dictionary<string, Color> PerClientActiveClientHighlightColor { get; set; }

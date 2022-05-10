@@ -189,9 +189,9 @@ Open the file using any text editor. find the entries **CycleGroup1ForwardHotkey
 Next find the entry **CycleGroup1ForwardHotkeys**. Most probably it will look like
 
     "CycleGroup1ClientsOrder": {
-      "EVE - Example DPS Toon 1": "1",
-      "EVE - Example DPS Toon 2": "2",
-      "EVE - Example DPS Toon 3": "3"
+      "EVE - Example DPS Toon 1": 1,
+      "EVE - Example DPS Toon 2": 2,
+      "EVE - Example DPS Toon 3": 3
     }
 
 You should modify this entry with a list of each of your clients replacing "Example DPS Toon 1", etc with the name of your character. The numbers on the right are used to force the order in which they cycle.

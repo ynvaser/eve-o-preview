@@ -8,11 +8,11 @@ namespace EveOPreview.Configuration
 	{
 		List<string> CycleGroup1ForwardHotkeys { get; set; }
 		List<string> CycleGroup1BackwardHotkeys { get; set; }
-		Dictionary<string, string> CycleGroup1ClientsOrder { get; set; }
+		Dictionary<string, int> CycleGroup1ClientsOrder { get; set; }
 
 		List<string> CycleGroup2ForwardHotkeys { get; set; }
 		List<string> CycleGroup2BackwardHotkeys { get; set; }
-		Dictionary<string, string> CycleGroup2ClientsOrder { get; set; }
+		Dictionary<string, int> CycleGroup2ClientsOrder { get; set; }
 
 		Dictionary<string, Color> PerClientActiveClientHighlightColor { get; set; }
 

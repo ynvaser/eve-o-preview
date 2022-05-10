@@ -109,9 +109,9 @@ namespace EveOPreview.Services
 			newClient.Value.Refresh(true);
 		}
 
-		public void CycleNextClient(bool isForwards, Dictionary<string, string> cycleOrder)
+		public void CycleNextClient(bool isForwards, Dictionary<string, int> cycleOrder)
 		{
-			IOrderedEnumerable<KeyValuePair<string, string>> clientOrder;
+			IOrderedEnumerable<KeyValuePair<string, int>> clientOrder;
 			if (isForwards)
 			{
 				clientOrder = cycleOrder.OrderBy(x => x.Value);
@@ -159,7 +159,7 @@ namespace EveOPreview.Services
 			}
 		}
 
-		public void RegisterCycleClientHotkey(IEnumerable<Keys> keys, bool isForwards, Dictionary<string, string> cycleOrder)
+		public void RegisterCycleClientHotkey(IEnumerable<Keys> keys, bool isForwards, Dictionary<string, int> cycleOrder)
 		{
 			foreach (var hotkey in keys)
 			{
