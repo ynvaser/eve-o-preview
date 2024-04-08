@@ -1,6 +1,8 @@
-﻿using System;
+﻿using EveOPreview.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace EveOPreview.Services.Implementation
 {
@@ -16,8 +18,11 @@ namespace EveOPreview.Services.Implementation
 		private IProcessInfo _currentProcessInfo;
 		#endregion
 
-		public ProcessMonitor()
+		private IThumbnailConfiguration configuration;
+
+		public ProcessMonitor(IThumbnailConfiguration configuration)
 		{
+			this.configuration = configuration;
 			this._processCache = new Dictionary<IntPtr, string>(512);
 			
 			// This field cannot be initialized properly in constructor
@@ -27,8 +32,7 @@ namespace EveOPreview.Services.Implementation
 
 		private bool IsMonitoredProcess(string processName)
 		{
-			// This is a possible extension point
-			return String.Equals(processName, ProcessMonitor.DEFAULT_PROCESS_NAME, StringComparison.OrdinalIgnoreCase);
+            return configuration.Processes.Contains(processName, StringComparer.OrdinalIgnoreCase);
 		}
 
 		private IProcessInfo GetCurrentProcessInfo()

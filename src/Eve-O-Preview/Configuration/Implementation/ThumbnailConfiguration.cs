@@ -47,8 +47,9 @@ namespace EveOPreview.Configuration.Implementation
 			this.ClientHotkey = new Dictionary<string, string>();
 			this.DisableThumbnail = new Dictionary<string, bool>();
 			this.PriorityClients = new List<string>();
+            this.Processes = new List<string> { "ExeFile", "firefox", "chrome" };
 
-			this.MinimizeToTray = false;
+            this.MinimizeToTray = false;
 			this.ThumbnailRefreshPeriod = 500;
 
 			this.EnableCompatibilityMode = false;
@@ -189,7 +190,10 @@ namespace EveOPreview.Configuration.Implementation
 		[JsonProperty]
 		private List<string> PriorityClients { get; set; }
 
-		public Point GetThumbnailLocation(string currentClient, string activeClient, Point defaultLocation)
+        [JsonProperty]
+        public List<string> Processes { get; set; }
+
+        public Point GetThumbnailLocation(string currentClient, string activeClient, Point defaultLocation)
 		{
 			Point location;
 
